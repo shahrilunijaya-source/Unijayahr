@@ -16,13 +16,17 @@ class LeaveBalanceSampleSeeder extends Seeder
 
         if (! $annual || ! $mc) return;
 
-        User::where('is_active', true)->take(5)->get()->each(function (User $user) use ($annual, $mc, $year) {
+        // orderBy('id') ensures deterministic selection across DB engines
+        User::where('is_active', true)->orderBy('id')->take(5)->get()->each(function (User $user) use ($annual, $mc, $year) {
             LeaveBalance::firstOrCreate(
                 ['user_id' => $user->id, 'leave_type_id' => $annual->id, 'year' => $year],
+                // Sample seeder uses 12 days — production HR must set per-staff based on tenure
                 ['allocated_days' => 12, 'carried_over' => 0]
             );
             LeaveBalance::firstOrCreate(
                 ['user_id' => $user->id, 'leave_type_id' => $mc->id, 'year' => $year],
+                // 14 days = EA 1955 standard outpatient MC entitlement (5+ yrs service)
+                // max_days_per_year=22 on the type includes hospitalisation leave cap
                 ['allocated_days' => 14, 'carried_over' => 0]
             );
         });

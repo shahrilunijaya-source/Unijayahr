@@ -82,6 +82,29 @@ class LeaveBalanceTest extends TestCase
         $this->assertEquals(12.0, $balance->remainingDays());
     }
 
+    public function test_approved_request_from_different_year_does_not_reduce_balance(): void
+    {
+        $balance = LeaveBalance::create([
+            'user_id'        => $this->user->id,
+            'leave_type_id'  => $this->leaveType->id,
+            'year'           => 2026,
+            'allocated_days' => 12.0,
+            'carried_over'   => 0.0,
+        ]);
+
+        // Approved request in 2025 — must NOT affect 2026 balance
+        LeaveRequest::create([
+            'user_id'       => $this->user->id,
+            'leave_type_id' => $this->leaveType->id,
+            'start_date'    => '2025-12-29',
+            'end_date'      => '2025-12-31',
+            'total_days'    => 3.0,
+            'status'        => 'approved',
+        ]);
+
+        $this->assertEquals(12.0, $balance->remainingDays());
+    }
+
     public function test_remaining_days_never_negative(): void
     {
         $balance = LeaveBalance::create([

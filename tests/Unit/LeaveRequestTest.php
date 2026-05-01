@@ -28,6 +28,14 @@ class LeaveRequestTest extends TestCase
         $this->assertEquals(2.0, LeaveRequest::countWeekdays($friday, $monday));
     }
 
+    public function test_count_weekdays_starting_on_saturday(): void
+    {
+        $saturday = Carbon::parse('2026-03-07');
+        $monday   = Carbon::parse('2026-03-09');
+        // Sat excluded, Sun excluded, Mon counted = 1
+        $this->assertEquals(1.0, LeaveRequest::countWeekdays($saturday, $monday));
+    }
+
     public function test_can_be_cancelled_when_pending(): void
     {
         $request = new LeaveRequest(['status' => 'pending']);
