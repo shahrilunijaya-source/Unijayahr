@@ -8,8 +8,8 @@ return new class extends Migration {
         Schema::create('leave_balances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('leave_type_id')->constrained()->cascadeOnDelete();
-            $table->smallInteger('year');
+            $table->foreignId('leave_type_id')->constrained()->restrictOnDelete();
+            $table->unsignedSmallInteger('year');
             $table->decimal('allocated_days', 5, 1)->default(0);
             $table->decimal('carried_over', 5, 1)->default(0);
             $table->timestamps();

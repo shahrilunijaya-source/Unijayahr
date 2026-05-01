@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->timestamp('hr_notified_at')->nullable();
             $table->string('document_path', 500)->nullable();
             $table->timestamps();
+            $table->index(['user_id', 'leave_type_id', 'status'], 'leave_requests_balance_lookup');
         });
     }
     public function down(): void { Schema::dropIfExists('leave_requests'); }
