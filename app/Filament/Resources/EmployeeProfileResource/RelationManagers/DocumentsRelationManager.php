@@ -53,6 +53,14 @@ class DocumentsRelationManager extends RelationManager
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['uploaded_by'] = auth()->id();
                     return $data;
+                })
+                ->after(function ($record): void {
+                    if ($record->file_path && \Storage::disk('local')->exists($record->file_path)) {
+                        $record->update([
+                            'file_size' => \Storage::disk('local')->size($record->file_path),
+                            'mime_type' => \Storage::disk('local')->mimeType($record->file_path),
+                        ]);
+                    }
                 }),
         ])->actions([
             Tables\Actions\Action::make('download')

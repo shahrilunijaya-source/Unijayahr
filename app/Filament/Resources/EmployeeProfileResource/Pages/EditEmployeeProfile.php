@@ -28,7 +28,8 @@ class EditEmployeeProfile extends EditRecord
         $bankData    = $data['bankDetail'] ?? [];
         unset($data['employeeProfile'], $data['bankDetail']);
 
-        $record->update($data);
+        // User record fields (name, job_title) are read-only on this form — no update needed
+        // Profile data is saved via updateOrCreate below
 
         if ($profileData) {
             $record->employeeProfile()->updateOrCreate(['user_id' => $record->id], $profileData);

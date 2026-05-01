@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -36,10 +37,12 @@ class EmployeeDocument extends Model
         return $this->belongsTo(User::class, 'uploaded_by');
     }
 
-    public function getDisplayLabelAttribute(): string
+    protected function displayLabel(): Attribute
     {
-        return $this->category === 'other'
-            ? ($this->label ?: 'Other')
-            : (self::CATEGORIES[$this->category] ?? $this->category);
+        return Attribute::make(
+            get: fn () => $this->category === 'other'
+                ? ($this->label ?: 'Other')
+                : (self::CATEGORIES[$this->category] ?? $this->category)
+        );
     }
 }
