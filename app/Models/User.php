@@ -7,6 +7,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -77,5 +78,45 @@ class User extends Authenticatable implements FilamentUser
     public function subordinates(): HasMany
     {
         return $this->hasMany(User::class, 'superior_id');
+    }
+
+    public function employeeProfile(): HasOne
+    {
+        return $this->hasOne(EmployeeProfile::class);
+    }
+
+    public function bankDetail(): HasOne
+    {
+        return $this->hasOne(EmployeeBankDetail::class);
+    }
+
+    public function emergencyContacts(): HasMany
+    {
+        return $this->hasMany(EmployeeEmergencyContact::class);
+    }
+
+    public function education(): HasMany
+    {
+        return $this->hasMany(EmployeeEducation::class);
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(EmployeeDocument::class);
+    }
+
+    public function leaveBalances(): HasMany
+    {
+        return $this->hasMany(LeaveBalance::class);
+    }
+
+    public function leaveRequests(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function leaveApprovals(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class, 'manager_id');
     }
 }
