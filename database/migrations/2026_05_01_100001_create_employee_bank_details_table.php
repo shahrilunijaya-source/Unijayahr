@@ -9,7 +9,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->unique();
             $table->string('bank_name', 100)->nullable();
-            $table->text('account_number')->nullable();
+            $table->text('account_number')->nullable(); // encrypted in model
             $table->string('account_holder_name', 200)->nullable();
             $table->timestamps();
         });

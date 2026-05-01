@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->string('institution', 300);
             $table->string('qualification', 100);
             $table->string('field_of_study', 200)->nullable();
-            $table->smallInteger('year_completed')->nullable();
+            $table->unsignedSmallInteger('year_completed')->nullable();
             $table->timestamps();
         });
     }
