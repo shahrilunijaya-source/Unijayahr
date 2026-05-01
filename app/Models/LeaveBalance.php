@@ -39,7 +39,7 @@ class LeaveBalance extends Model
         return (float) LeaveRequest::where('user_id', $this->user_id)
             ->where('leave_type_id', $this->leave_type_id)
             ->where('status', 'approved')
-            ->whereYear('start_date', $this->year)
+            ->whereBetween('start_date', ["{$this->year}-01-01", "{$this->year}-12-31"])
             ->sum('total_days');
     }
 

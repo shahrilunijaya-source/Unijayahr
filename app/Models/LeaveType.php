@@ -31,8 +31,8 @@ class LeaveType extends Model
         return $this->hasMany(LeaveRequest::class);
     }
 
-    public static function active(): \Illuminate\Database\Eloquent\Builder
+    public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
-        return static::where('is_active', true);
+        return $query->where('is_active', true);
     }
 }

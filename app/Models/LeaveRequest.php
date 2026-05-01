@@ -54,4 +54,6 @@ class LeaveRequest extends Model
     public function isPending(): bool { return $this->status === 'pending'; }
     public function isApproved(): bool { return $this->status === 'approved'; }
     public function canBeCancelled(): bool { return $this->status === 'pending'; }
+    public function isRejected(): bool { return $this->status === 'rejected'; }
+    public function isCancelled(): bool { return $this->status === 'cancelled'; }
 }

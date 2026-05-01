@@ -21,6 +21,11 @@ class EmployeeDocument extends Model
         'file_size', 'mime_type', 'uploaded_by',
     ];
 
+    protected function casts(): array
+    {
+        return ['file_size' => 'integer'];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
