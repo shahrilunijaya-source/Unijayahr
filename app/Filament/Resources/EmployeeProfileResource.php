@@ -113,6 +113,7 @@ class EmployeeProfileResource extends Resource
         return [
             RelationManagers\EmergencyContactsRelationManager::class,
             RelationManagers\EducationRelationManager::class,
+            RelationManagers\DocumentsRelationManager::class,
         ];
     }
 
