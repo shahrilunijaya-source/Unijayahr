@@ -48,8 +48,8 @@ class LeaveRequestResource extends Resource
             Infolists\Components\Section::make('Decision')
                 ->hidden(fn ($record) => $record->isPending())
                 ->schema([
-                    Infolists\Components\TextEntry::make('manager.name')->label('Decided by'),
-                    Infolists\Components\TextEntry::make('manager_note')->label('Note')->columnSpanFull(),
+                    Infolists\Components\TextEntry::make('manager.name')->label('Decided by')->placeholder('—'),
+                    Infolists\Components\TextEntry::make('manager_note')->label('Note')->columnSpanFull()->placeholder('—'),
                 ])->columns(2),
         ]);
     }
@@ -90,7 +90,7 @@ class LeaveRequestResource extends Resource
             Tables\Actions\Action::make('approve')
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
-                ->visible(fn ($record) => $record->isPending())
+                ->visible(fn ($record) => $record->isPending() && auth()->user()?->hasAnyRole(['admin', 'hr']))
                 ->requiresConfirmation()
                 ->action(function ($record) {
                     $record->update([
@@ -102,7 +102,7 @@ class LeaveRequestResource extends Resource
             Tables\Actions\Action::make('reject')
                 ->icon('heroicon-o-x-circle')
                 ->color('danger')
-                ->visible(fn ($record) => $record->isPending())
+                ->visible(fn ($record) => $record->isPending() && auth()->user()?->hasAnyRole(['admin', 'hr']))
                 ->form([
                     Forms\Components\Textarea::make('manager_note')
                         ->label('Reason')

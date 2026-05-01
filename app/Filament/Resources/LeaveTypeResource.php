@@ -51,7 +51,7 @@ class LeaveTypeResource extends Resource
             Tables\Columns\IconColumn::make('requires_document')->boolean()->label('Doc Required'),
             Tables\Columns\TextColumn::make('max_days_per_year')
                 ->label('Max Days/Yr')
-                ->formatStateUsing(fn ($state) => $state ? $state : '—'),
+                ->formatStateUsing(fn ($state) => $state !== null ? $state : '—'),
             Tables\Columns\IconColumn::make('is_active')->boolean()->label('Active'),
         ])->actions([
             Tables\Actions\EditAction::make(),
