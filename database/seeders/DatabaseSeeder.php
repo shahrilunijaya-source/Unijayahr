@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             KpiRubricSeeder::class,
             KpiPeriodSeeder::class,
             StaffSuggestionSeeder::class,
+            LeaveTypeSeeder::class,
+            LeaveBalanceSampleSeeder::class,
         ]);
     }
 }
