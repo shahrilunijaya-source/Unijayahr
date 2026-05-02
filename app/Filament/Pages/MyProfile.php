@@ -147,7 +147,7 @@ class MyProfile extends Page
                                     Forms\Components\FileUpload::make('file')
                                         ->label('File')
                                         ->disk('local')
-                                        ->directory('documents/' . auth()->id())
+                                        ->directory(fn () => 'documents/' . auth()->id())
                                         ->visibility('private')
                                         ->required()
                                         ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
@@ -217,8 +217,10 @@ class MyProfile extends Page
             }
             $path     = $doc['file'];
             $fullPath = Storage::disk('local')->path($path);
-            $size     = file_exists($fullPath) ? filesize($fullPath) : 0;
-            $mime     = file_exists($fullPath) ? mime_content_type($fullPath) : null;
+            $size     = file_exists($fullPath) ? filesize($fullPath) : null;
+            $mime     = file_exists($fullPath)
+                ? (new \finfo(FILEINFO_MIME_TYPE))->file($fullPath)
+                : null;
 
             \App\Models\EmployeeDocument::create([
                 'user_id'     => $user->id,
@@ -231,9 +233,8 @@ class MyProfile extends Page
             ]);
         }
 
-        // Reset document repeater after save
-        $this->data['new_documents'] = [];
-
         Notification::make()->title('Profile saved.')->success()->send();
+        $this->redirect(static::getUrl(), navigate: true);
+        return;
     }
 }
