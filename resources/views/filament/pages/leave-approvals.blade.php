@@ -1,6 +1,6 @@
 <x-filament-panels::page>
 
-    @php $requests = $this->getPendingRequests(); @endphp
+    @php $requests = $this->pendingRequests; @endphp
 
     @if($requests->isEmpty())
         <div class="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -51,8 +51,8 @@
         x-data="{ open: false }"
         x-on:open-reject-modal.window="open = true"
         x-show="open"
+        x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-        style="display:none"
     >
         <div class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800">
             <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-3">Reject Leave Request</h3>

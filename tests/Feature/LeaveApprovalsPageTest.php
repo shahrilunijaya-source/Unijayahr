@@ -63,7 +63,7 @@ class LeaveApprovalsPageTest extends TestCase
         $req3 = $this->makePendingRequest($unrelated, $type);
 
         $component = Livewire::actingAs($manager)->test(LeaveApprovalsPage::class);
-        $pending = $component->instance()->getPendingRequests();
+        $pending = $component->instance()->pendingRequests;
 
         $ids = $pending->pluck('id')->all();
 
@@ -90,7 +90,7 @@ class LeaveApprovalsPageTest extends TestCase
         $this->makePendingRequest($u3, $type);
 
         $component = Livewire::actingAs($hr)->test(LeaveApprovalsPage::class);
-        $pending = $component->instance()->getPendingRequests();
+        $pending = $component->instance()->pendingRequests;
 
         $this->assertCount(3, $pending);
     }
@@ -128,7 +128,7 @@ class LeaveApprovalsPageTest extends TestCase
 
         Livewire::actingAs($manager)
             ->test(LeaveApprovalsPage::class)
-            ->set('rejectingId', $req->id)
+            ->call('openRejectModal', $req->id)
             ->set('rejectNote', 'Peak season, cannot be granted.')
             ->call('confirmReject');
 
@@ -167,5 +167,57 @@ class LeaveApprovalsPageTest extends TestCase
         $this->actingAs($staff);
 
         $this->assertFalse(LeaveApprovalsPage::canAccess());
+    }
+
+    // 7. Manager cannot reject request outside team (IDOR via confirmReject)
+    public function test_manager_cannot_reject_request_outside_team(): void
+    {
+        $manager  = User::factory()->create(['is_active' => true]);
+        $manager->assignRole('manager');
+        $unrelated = User::factory()->create(['is_active' => true]);
+        $leaveType = LeaveType::factory()->create(['is_active' => true]);
+
+        $request = LeaveRequest::create([
+            'user_id'       => $unrelated->id,
+            'leave_type_id' => $leaveType->id,
+            'start_date'    => now()->addDays(3)->toDateString(),
+            'end_date'      => now()->addDays(4)->toDateString(),
+            'total_days'    => 2,
+            'status'        => 'pending',
+        ]);
+
+        Livewire::actingAs($manager)
+            ->test(LeaveApprovalsPage::class)
+            ->call('openRejectModal', $request->id)
+            ->set('rejectNote', 'not authorized')
+            ->call('confirmReject');
+
+        $this->assertDatabaseHas('leave_requests', ['id' => $request->id, 'status' => 'pending']);
+    }
+
+    // 8. cancelReject clears state
+    public function test_cancel_reject_clears_state(): void
+    {
+        $manager = User::factory()->create(['is_active' => true]);
+        $manager->assignRole('manager');
+        $subordinate = User::factory()->create(['is_active' => true, 'superior_id' => $manager->id]);
+        $leaveType = LeaveType::factory()->create(['is_active' => true]);
+
+        $request = LeaveRequest::create([
+            'user_id'       => $subordinate->id,
+            'leave_type_id' => $leaveType->id,
+            'start_date'    => now()->addDays(3)->toDateString(),
+            'end_date'      => now()->addDays(4)->toDateString(),
+            'total_days'    => 2,
+            'status'        => 'pending',
+        ]);
+
+        Livewire::actingAs($manager)
+            ->test(LeaveApprovalsPage::class)
+            ->call('openRejectModal', $request->id)
+            ->set('rejectNote', 'some note')
+            ->call('cancelReject')
+            ->assertSet('rejectingId', null)
+            ->assertSet('rejectNote', '');
     }
 }

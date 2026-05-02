@@ -6,6 +6,9 @@ use App\Models\LeaveRequest;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Locked;
 
 class LeaveApprovalsPage extends Page
 {
@@ -16,6 +19,8 @@ class LeaveApprovalsPage extends Page
     protected static string  $view            = 'filament.pages.leave-approvals';
 
     public string $rejectNote = '';
+
+    #[Locked]
     public ?int $rejectingId = null;
 
     public static function shouldRegisterNavigation(): bool
@@ -28,7 +33,8 @@ class LeaveApprovalsPage extends Page
         return auth()->check() && auth()->user()->hasAnyRole(['admin', 'hr', 'manager']);
     }
 
-    public function getPendingRequests()
+    #[Computed]
+    public function pendingRequests(): Collection
     {
         $user  = auth()->user();
         $query = LeaveRequest::query()
@@ -38,7 +44,6 @@ class LeaveApprovalsPage extends Page
         if ($user->hasAnyRole(['admin', 'hr'])) {
             // see all
         } else {
-            // manager: only own subordinates
             $subordinateIds = $user->subordinates()->pluck('id');
             $query->whereIn('user_id', $subordinateIds);
         }
@@ -48,14 +53,28 @@ class LeaveApprovalsPage extends Page
 
     public function approve(int $id): void
     {
-        $request = $this->findApprovable($id);
-        if (!$request) return;
+        $user = auth()->user();
 
-        $request->update([
+        // Atomic: only update if still pending AND (admin/hr OR belongs to subordinate)
+        $query = LeaveRequest::where('id', $id)->where('status', 'pending');
+        if (!$user->hasAnyRole(['admin', 'hr'])) {
+            $subordinateIds = $user->subordinates()->pluck('id');
+            $query->whereIn('user_id', $subordinateIds);
+        }
+
+        $affected = $query->update([
             'status'         => 'approved',
-            'manager_id'     => auth()->id(),
+            'manager_id'     => $user->id,
             'hr_notified_at' => now(),
         ]);
+
+        if ($affected === 0) {
+            Notification::make()->title('Request not found or already actioned.')->danger()->send();
+            return;
+        }
+
+        // Reload for notification body
+        $request = LeaveRequest::with(['applicant', 'leaveType'])->find($id);
 
         // Notify applicant
         Notification::make()
@@ -64,8 +83,8 @@ class LeaveApprovalsPage extends Page
             ->success()
             ->sendToDatabase($request->applicant);
 
-        // Notify HR (if approver is not HR/admin themselves)
-        $hrUsers = User::role(['admin', 'hr'])->where('id', '!=', auth()->id())->get();
+        // Notify HR/admin (skip self)
+        $hrUsers = User::role(['admin', 'hr'])->where('id', '!=', $user->id)->get();
         foreach ($hrUsers as $hrUser) {
             Notification::make()
                 ->title($request->applicant->name . '\'s leave approved')
@@ -88,19 +107,31 @@ class LeaveApprovalsPage extends Page
     {
         if (!$this->rejectingId) return;
 
-        $request = $this->findApprovable($this->rejectingId);
-        if (!$request) {
-            $this->rejectingId = null;
-            return;
+        $user = auth()->user();
+
+        $query = LeaveRequest::where('id', $this->rejectingId)->where('status', 'pending');
+        if (!$user->hasAnyRole(['admin', 'hr'])) {
+            $subordinateIds = $user->subordinates()->pluck('id');
+            $query->whereIn('user_id', $subordinateIds);
         }
 
-        $request->update([
+        $this->validate(['rejectNote' => 'nullable|string|max:1000']);
+
+        $affected = $query->update([
             'status'       => 'rejected',
-            'manager_id'   => auth()->id(),
+            'manager_id'   => $user->id,
             'manager_note' => $this->rejectNote ?: null,
         ]);
 
-        // Notify applicant
+        if ($affected === 0) {
+            Notification::make()->title('Request not found or already actioned.')->danger()->send();
+            $this->rejectingId = null;
+            $this->rejectNote  = '';
+            return;
+        }
+
+        $request = LeaveRequest::with(['applicant', 'leaveType'])->find($this->rejectingId);
+
         Notification::make()
             ->title('Leave request rejected')
             ->body($request->leaveType->name . ($this->rejectNote ? ': ' . $this->rejectNote : ''))
@@ -117,25 +148,5 @@ class LeaveApprovalsPage extends Page
     {
         $this->rejectingId = null;
         $this->rejectNote  = '';
-    }
-
-    private function findApprovable(int $id): ?LeaveRequest
-    {
-        $user  = auth()->user();
-        $query = LeaveRequest::where('id', $id)->where('status', 'pending');
-
-        if (!$user->hasAnyRole(['admin', 'hr'])) {
-            $subordinateIds = $user->subordinates()->pluck('id');
-            $query->whereIn('user_id', $subordinateIds);
-        }
-
-        $request = $query->first();
-
-        if (!$request) {
-            Notification::make()->title('Request not found or already actioned.')->danger()->send();
-            return null;
-        }
-
-        return $request;
     }
 }
