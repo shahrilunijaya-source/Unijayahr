@@ -117,6 +117,7 @@ class MyLeavePage extends Page
         $year = now()->year;
         return LeaveBalance::where('user_id', auth()->id())
             ->where('year', $year)
+            ->whereHas('leaveType', fn ($q) => $q->where('is_active', true))
             ->with('leaveType')
             ->get();
     }
