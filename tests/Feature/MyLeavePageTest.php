@@ -136,6 +136,30 @@ class MyLeavePageTest extends TestCase
     }
 
     // 6. Cannot cancel an approved request
+    public function test_cannot_cancel_another_users_request(): void
+    {
+        $user1 = \App\Models\User::factory()->create(['is_active' => true]);
+        $user2 = \App\Models\User::factory()->create(['is_active' => true]);
+        $leaveType = \App\Models\LeaveType::factory()->create(['is_active' => true]);
+
+        $request = \App\Models\LeaveRequest::create([
+            'user_id'       => $user2->id,
+            'leave_type_id' => $leaveType->id,
+            'start_date'    => now()->addDays(3)->toDateString(),
+            'end_date'      => now()->addDays(4)->toDateString(),
+            'total_days'    => 2,
+            'status'        => 'pending',
+        ]);
+
+        Livewire::actingAs($user1)
+            ->test(\App\Filament\Pages\MyLeavePage::class)
+            ->call('cancelRequest', $request->id)
+            ->assertNotified(); // got "Request not found" danger notification
+
+        $this->assertDatabaseHas('leave_requests', ['id' => $request->id, 'status' => 'pending']);
+    }
+
+    // 7. Cannot cancel an approved request
     public function test_cannot_cancel_approved_request(): void
     {
         $user = $this->makeUser();

@@ -6,7 +6,6 @@ use App\Models\LeaveBalance;
 use App\Models\LeaveRequest;
 use App\Models\LeaveType;
 use Carbon\Carbon;
-use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -66,23 +65,19 @@ class MyLeavePage extends Page
                     $typeId = $get('leave_type_id');
                     if (!$typeId) return false;
                     return (bool) LeaveType::find($typeId)?->requires_document;
-                }),
+                })
+                ->required(fn (\Filament\Forms\Get $get): bool =>
+                    (bool) \App\Models\LeaveType::find($get('leave_type_id'))?->requires_document
+                ),
         ])->columns(2);
-    }
-
-    protected function getFormActions(): array
-    {
-        return [
-            Action::make('apply')
-                ->label('Submit request')
-                ->submit('apply'),
-        ];
     }
 
     public function apply(): void
     {
         $data = $this->form->getState();
         $user = auth()->user();
+
+        \App\Models\LeaveType::active()->findOrFail($data['leave_type_id']);
 
         $start     = Carbon::parse($data['start_date']);
         $end       = Carbon::parse($data['end_date']);
@@ -133,7 +128,12 @@ class MyLeavePage extends Page
 
     public function cancelRequest(int $id): void
     {
-        $request = LeaveRequest::where('user_id', auth()->id())->findOrFail($id);
+        $request = \App\Models\LeaveRequest::where('user_id', auth()->id())->find($id);
+
+        if (!$request) {
+            Notification::make()->title('Request not found.')->danger()->send();
+            return;
+        }
 
         if (!$request->canBeCancelled()) {
             Notification::make()->title('Request cannot be cancelled.')->danger()->send();
