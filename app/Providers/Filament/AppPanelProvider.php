@@ -34,6 +34,7 @@ class AppPanelProvider extends PanelProvider
             ->brandName('Unijaya HR')
             ->brandLogo(asset('logo_unijaya.png'))
             ->brandLogoHeight('2rem')
+            ->darkMode(true)
             ->viteTheme('resources/css/filament/app/theme.css')
             ->colors([
                 'primary'  => Color::hex('#CC0000'),
