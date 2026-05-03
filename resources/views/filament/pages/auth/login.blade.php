@@ -1,5 +1,5 @@
-@include('filament.partials.login-panel-left')
 <x-filament-panels::page.simple>
+    @include('filament.partials.login-panel-left')
     <div class="hr-login-heading">Portal HR Unijaya</div>
     <p class="hr-login-sub mb-6">Masuk dengan akaun anda</p>
 
