@@ -742,17 +742,19 @@
    BADGES / STATUS PILLS
    ═══════════════════════════════════════════════════════════ */
 
+/* ─── Base Badge Container ─────────────────────────────────── */
 .fi-badge {
     display: inline-flex !important;
     align-items: center !important;
     gap: 5px !important;
     font-size: 11.5px !important;
     font-weight: 500 !important;
-    padding: 3px 10px 3px 8px !important;
+    padding: 3px 10px !important;
     border-radius: 6px !important;
     letter-spacing: 0 !important;
     line-height: 1.4 !important;
-    border: none !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease !important;
 }
 
 .fi-badge::before {
@@ -764,51 +766,97 @@
     display: inline-block !important;
 }
 
+/* ─── Primary Badge Variant ────────────────────────────────── */
+.fi-badge.fi-color-primary {
+    background-color: #fff1f1 !important;
+    color: #CC0000 !important;
+    border: 1px solid transparent !important;
+}
+
+.fi-badge.fi-color-primary::before {
+    background-color: #CC0000 !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-color-primary:hover {
+    background-color: #ffe6e6 !important;
+    border-color: transparent !important;
+}
+
+/* ─── Success Badge Variant ────────────────────────────────── */
 .fi-badge.fi-color-success {
     background-color: #f0fdf4 !important;
-    color: var(--color-success) !important;
+    color: #15803d !important;
+    border: 1px solid transparent !important;
 }
 
 .fi-badge.fi-color-success::before {
-    background-color: var(--color-success) !important;
-    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.18) !important;
+    background-color: #16a34a !important;
+    box-shadow: none !important;
 }
 
+.fi-badge.fi-color-success:hover {
+    background-color: #e8fcef !important;
+    border-color: transparent !important;
+}
+
+/* ─── Warning Badge Variant ────────────────────────────────── */
 .fi-badge.fi-color-warning {
     background-color: #fffbeb !important;
-    color: var(--color-warning) !important;
-    border: none !important;
+    color: #d97706 !important;
+    border: 1px solid transparent !important;
 }
 
 .fi-badge.fi-color-warning::before {
-    background-color: var(--color-warning) !important;
+    background-color: #d97706 !important;
+    box-shadow: none !important;
 }
 
+.fi-badge.fi-color-warning:hover {
+    background-color: #fef5e7 !important;
+    border-color: transparent !important;
+}
+
+/* ─── Danger Badge Variant ─────────────────────────────────── */
 .fi-badge.fi-color-danger {
     background-color: #fef2f2 !important;
-    color: var(--color-danger) !important;
-    border: none !important;
+    color: #dc2626 !important;
+    border: 1px solid transparent !important;
 }
 
 .fi-badge.fi-color-danger::before {
-    background-color: var(--color-danger) !important;
+    background-color: #dc2626 !important;
+    box-shadow: none !important;
 }
 
+.fi-badge.fi-color-danger:hover {
+    background-color: #fee2e2 !important;
+    border-color: transparent !important;
+}
+
+/* ─── Info Badge Variant ───────────────────────────────────── */
 .fi-badge.fi-color-info {
     background-color: #eff6ff !important;
-    color: var(--color-info) !important;
-    border: none !important;
+    color: #2563eb !important;
+    border: 1px solid transparent !important;
 }
 
 .fi-badge.fi-color-info::before {
-    background-color: var(--color-info) !important;
+    background-color: #2563eb !important;
+    box-shadow: none !important;
 }
 
+.fi-badge.fi-color-info:hover {
+    background-color: #dbeafe !important;
+    border-color: transparent !important;
+}
+
+/* ─── Gray/Secondary Badge Variant ─────────────────────────── */
 .fi-badge.fi-color-gray,
 .fi-badge.fi-color-secondary {
     background-color: #F8FAFC !important;
     color: #64748D !important;
-    border: 1px solid #E5EDF5 !important;
+    border: 1px solid var(--color-border) !important;
 }
 
 .fi-badge.fi-color-gray::before,
@@ -816,14 +864,119 @@
     background-color: #cdd8e5 !important;
 }
 
-.fi-badge.fi-color-primary {
-    background-color: #fff1f1 !important;
-    color: var(--color-primary) !important;
-    border: none !important;
+.fi-badge.fi-color-gray:hover,
+.fi-badge.fi-color-secondary:hover {
+    background-color: #F1F5F9 !important;
+    border-color: #D1D5DB !important;
 }
 
-.fi-badge.fi-color-primary::before {
+/* ─── Pill Style Variant (Full Rounded) ────────────────────── */
+.fi-badge.fi-style-pill {
+    border-radius: 999px !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    font-weight: 600 !important;
+}
+
+/* ─── Outline Badge Variant (Transparent Background) ─────────── */
+.fi-badge.fi-outline.fi-color-primary {
+    background-color: transparent !important;
+    color: var(--color-primary) !important;
+    border: 2px solid var(--color-primary) !important;
+}
+
+.fi-badge.fi-outline.fi-color-primary::before {
     background-color: var(--color-primary) !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-primary:hover {
+    background-color: rgba(204, 0, 0, 0.08) !important;
+}
+
+.fi-badge.fi-outline.fi-color-success {
+    background-color: transparent !important;
+    color: var(--color-success) !important;
+    border: 2px solid var(--color-success) !important;
+}
+
+.fi-badge.fi-outline.fi-color-success::before {
+    background-color: var(--color-success) !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-success:hover {
+    background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+.fi-badge.fi-outline.fi-color-warning {
+    background-color: transparent !important;
+    color: var(--color-warning) !important;
+    border: 2px solid var(--color-warning) !important;
+}
+
+.fi-badge.fi-outline.fi-color-warning::before {
+    background-color: var(--color-warning) !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-warning:hover {
+    background-color: rgba(245, 158, 11, 0.08) !important;
+}
+
+.fi-badge.fi-outline.fi-color-danger {
+    background-color: transparent !important;
+    color: var(--color-danger) !important;
+    border: 2px solid var(--color-danger) !important;
+}
+
+.fi-badge.fi-outline.fi-color-danger::before {
+    background-color: var(--color-danger) !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-danger:hover {
+    background-color: rgba(239, 68, 68, 0.08) !important;
+}
+
+.fi-badge.fi-outline.fi-color-info {
+    background-color: transparent !important;
+    color: var(--color-info) !important;
+    border: 2px solid var(--color-info) !important;
+}
+
+.fi-badge.fi-outline.fi-color-info::before {
+    background-color: var(--color-info) !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-info:hover {
+    background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+.fi-badge.fi-outline.fi-color-gray,
+.fi-badge.fi-outline.fi-color-secondary {
+    background-color: transparent !important;
+    color: #64748D !important;
+    border: 2px solid #E5EDF5 !important;
+}
+
+.fi-badge.fi-outline.fi-color-gray::before,
+.fi-badge.fi-outline.fi-color-secondary::before {
+    background-color: #64748D !important;
+    box-shadow: none !important;
+}
+
+.fi-badge.fi-outline.fi-color-gray:hover,
+.fi-badge.fi-outline.fi-color-secondary:hover {
+    background-color: rgba(100, 116, 139, 0.05) !important;
+    border-color: #D1D5DB !important;
+}
+
+/* ─── Disabled Badge State ─────────────────────────────────── */
+.fi-badge:disabled,
+.fi-badge.fi-disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
