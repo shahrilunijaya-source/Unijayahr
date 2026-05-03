@@ -66,14 +66,6 @@ class AppPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 RequirePasswordChange::class,
-            ])
-            ->renderHook(
-                PanelsRenderHook::BODY_START,
-                fn (): HtmlString => new HtmlString(
-                    request()->routeIs('filament.app.auth.login')
-                        ? view('filament.partials.login-panel-left')->render()
-                        : ''
-                )
-            );
+            ]);
     }
 }
