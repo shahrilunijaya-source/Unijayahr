@@ -1,3 +1,4 @@
+@vite(['resources/css/filament/app/theme.css'])
 <x-filament-panels::page.simple>
     <div class="hr-login-heading">Portal HR Unijaya</div>
     <p class="hr-login-sub mb-6">Masuk dengan akaun anda</p>
