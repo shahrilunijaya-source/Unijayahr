@@ -739,6 +739,447 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
+   COMPREHENSIVE RESPONSIVE DESIGN — MOBILE, TABLET, DESKTOP
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Mobile: < 640px (320px - 639px) ──────────────────────── */
+@media (max-width: 639px) {
+    /* ─── Buttons ──────────────────────────────────────────── */
+    .fi-btn {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+        font-size: 0.8125rem !important;
+    }
+
+    .fi-btn.fi-color-primary {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+
+    .fi-btn.fi-color-gray {
+        padding: calc(var(--spacing-sm) - 2px) var(--spacing-md) !important;
+    }
+
+    .fi-btn.fi-color-danger {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+
+    /* ─── Form Fields ──────────────────────────────────────── */
+    .fi-input,
+    .fi-textarea,
+    .fi-select {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+        font-size: 0.8125rem !important;
+    }
+
+    .fi-input:focus,
+    .fi-textarea:focus,
+    .fi-select:focus {
+        padding: var(--spacing-sm) calc(var(--spacing-md) - 1px) !important;
+    }
+
+    .fi-input.error,
+    .fi-textarea.error,
+    .fi-select.error,
+    [data-error] .fi-input,
+    [data-error] .fi-textarea,
+    [data-error] .fi-select {
+        padding: var(--spacing-sm) calc(var(--spacing-md) - 1px) !important;
+    }
+
+    /* ─── Form Labels ──────────────────────────────────────── */
+    .fi-form-field-label {
+        font-size: 0.75rem !important;
+    }
+
+    .fi-fo-field-wrp-label label {
+        font-size: 0.75rem !important;
+    }
+
+    /* ─── Input Wrapper ────────────────────────────────────── */
+    .fi-input-wrp {
+        width: 100% !important;
+    }
+
+    /* ─── Badges ───────────────────────────────────────────── */
+    .fi-badge {
+        padding: 2px 6px !important;
+        font-size: 10px !important;
+    }
+
+    .fi-badge.fi-style-pill {
+        padding: 2px 6px !important;
+    }
+
+    /* ─── Tables ───────────────────────────────────────────── */
+    .fi-ta-header {
+        padding: var(--spacing-sm) !important;
+    }
+
+    .fi-ta-header-cell {
+        padding: var(--spacing-sm) !important;
+        font-size: 9px !important;
+    }
+
+    .fi-ta-row {
+        padding: var(--spacing-sm) !important;
+    }
+
+    .fi-ta-cell {
+        padding: var(--spacing-sm) !important;
+        font-size: 0.8125rem !important;
+    }
+
+    .fi-ta-selection-cell {
+        padding: var(--spacing-sm) !important;
+    }
+
+    /* ─── Pagination ───────────────────────────────────────── */
+    .fi-ta-pagination-ctn,
+    .fi-ta-pagination {
+        padding: var(--spacing-sm) !important;
+        flex-direction: column !important;
+        gap: var(--spacing-md) !important;
+    }
+
+    .fi-pagination-item-btn {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+        font-size: 0.75rem !important;
+        width: 100% !important;
+    }
+
+    /* ─── Modals ───────────────────────────────────────────── */
+    .fi-modal-window {
+        margin: var(--spacing-md) !important;
+        width: calc(100% - var(--spacing-xl)) !important;
+    }
+
+    .fi-modal-header {
+        padding: 14px 16px 12px !important;
+    }
+
+    .fi-modal-content {
+        padding: 16px !important;
+    }
+
+    .fi-modal-footer {
+        padding: 12px 16px !important;
+    }
+
+    /* ─── Page Layout ──────────────────────────────────────── */
+    .fi-main-ctn {
+        padding: 16px !important;
+    }
+
+    /* ─── Section/Panel Cards ─────────────────────────────── */
+    .fi-section-content {
+        padding: 16px !important;
+    }
+
+    .fi-section-header {
+        padding: 12px 16px !important;
+    }
+
+    /* ─── Header ───────────────────────────────────────────── */
+    .fi-header-heading {
+        font-size: 1.125rem !important;
+    }
+
+    /* ─── Infolist ─────────────────────────────────────────── */
+    .fi-in-entry-label-ctn label,
+    .fi-in-entry-label {
+        font-size: 9px !important;
+    }
+
+    .fi-in-text-entry-content {
+        font-size: 0.875rem !important;
+    }
+
+    /* ─── Login Page ───────────────────────────────────────── */
+    .hr-login-left {
+        width: 100vw !important;
+        height: auto !important;
+        position: relative !important;
+        padding: 2rem 1.5rem !important;
+    }
+
+    .fi-simple-layout {
+        padding-left: 0 !important;
+    }
+
+    .fi-simple-main {
+        margin: var(--spacing-md) !important;
+        width: calc(100% - var(--spacing-xl)) !important;
+    }
+
+    .hr-login-heading {
+        font-size: 1.75rem !important;
+    }
+
+    /* ─── Sidebar ──────────────────────────────────────────── */
+    .fi-sidebar-item-label {
+        font-size: 0.75rem !important;
+    }
+
+    .fi-sf-name {
+        font-size: 11px !important;
+    }
+
+    .fi-sf-role {
+        font-size: 9px !important;
+    }
+}
+
+/* ─── Tablet: 640px - 1023px ───────────────────────────────── */
+@media (min-width: 640px) and (max-width: 1023px) {
+    /* ─── Buttons ──────────────────────────────────────────── */
+    .fi-btn {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+        font-size: 0.8125rem !important;
+    }
+
+    .fi-btn.fi-color-primary {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    .fi-btn.fi-color-gray {
+        padding: calc(var(--spacing-md) - 2px) var(--spacing-lg) !important;
+    }
+
+    .fi-btn.fi-color-danger {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    /* ─── Form Fields ──────────────────────────────────────── */
+    .fi-input,
+    .fi-textarea,
+    .fi-select {
+        padding: var(--spacing-md) var(--spacing-base) !important;
+    }
+
+    .fi-input:focus,
+    .fi-textarea:focus,
+    .fi-select:focus {
+        padding: var(--spacing-md) calc(var(--spacing-base) - 1px) !important;
+    }
+
+    .fi-input.error,
+    .fi-textarea.error,
+    .fi-select.error,
+    [data-error] .fi-input,
+    [data-error] .fi-textarea,
+    [data-error] .fi-select {
+        padding: var(--spacing-md) calc(var(--spacing-base) - 1px) !important;
+    }
+
+    /* ─── Form Labels ──────────────────────────────────────── */
+    .fi-form-field-label {
+        font-size: 0.8125rem !important;
+    }
+
+    /* ─── Badges ───────────────────────────────────────────── */
+    .fi-badge {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+        font-size: 11px !important;
+    }
+
+    .fi-badge.fi-style-pill {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+    }
+
+    /* ─── Tables ───────────────────────────────────────────── */
+    .fi-ta-header {
+        padding: var(--spacing-md) !important;
+    }
+
+    .fi-ta-header-cell {
+        padding: var(--spacing-md) !important;
+        font-size: 10px !important;
+    }
+
+    .fi-ta-row {
+        padding: var(--spacing-md) !important;
+    }
+
+    .fi-ta-cell {
+        padding: var(--spacing-md) !important;
+        font-size: 0.84375rem !important;
+    }
+
+    .fi-ta-selection-cell {
+        padding: var(--spacing-md) !important;
+    }
+
+    /* ─── Pagination ───────────────────────────────────────── */
+    .fi-ta-pagination-ctn,
+    .fi-ta-pagination {
+        padding: var(--spacing-md) !important;
+        gap: var(--spacing-md) !important;
+    }
+
+    .fi-pagination-item-btn {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+        font-size: 0.8125rem !important;
+    }
+
+    /* ─── Page Layout ──────────────────────────────────────── */
+    .fi-main-ctn {
+        padding: 20px 24px !important;
+    }
+
+    /* ─── Modals ───────────────────────────────────────────── */
+    .fi-modal-window {
+        margin: var(--spacing-lg) !important;
+    }
+
+    .fi-modal-header {
+        padding: 16px 20px 14px !important;
+    }
+
+    .fi-modal-content {
+        padding: 18px 20px !important;
+    }
+
+    .fi-modal-footer {
+        padding: 13px 20px !important;
+    }
+
+    /* ─── Section/Panel Cards ─────────────────────────────── */
+    .fi-section-content {
+        padding: 18px !important;
+    }
+
+    .fi-section-header {
+        padding: 13px 18px !important;
+    }
+
+    /* ─── Header ───────────────────────────────────────────── */
+    .fi-header-heading {
+        font-size: 1.25rem !important;
+    }
+
+    /* ─── Infolist ─────────────────────────────────────────── */
+    .fi-in-entry-label-ctn label,
+    .fi-in-entry-label {
+        font-size: 9px !important;
+    }
+
+    /* ─── Sidebar ──────────────────────────────────────────── */
+    .fi-sidebar-item-label {
+        font-size: 0.8125rem !important;
+    }
+
+    .fi-sf-name {
+        font-size: 12px !important;
+    }
+
+    .fi-sf-role {
+        font-size: 10px !important;
+    }
+}
+
+/* ─── Desktop: >= 1024px ───────────────────────────────────── */
+@media (min-width: 1024px) {
+    /* ─── Buttons (default styles at full spec) ────────────── */
+    .fi-btn {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    .fi-btn.fi-color-primary {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    .fi-btn.fi-color-gray {
+        padding: calc(var(--spacing-md) - 2px) var(--spacing-lg) !important;
+    }
+
+    .fi-btn.fi-color-danger {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    /* ─── Form Fields (default styles at full spec) ──────────── */
+    .fi-input,
+    .fi-textarea,
+    .fi-select {
+        padding: var(--spacing-md) var(--spacing-base) !important;
+    }
+
+    /* ─── Badges (default styles at full spec) ────────────────── */
+    .fi-badge {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+    }
+
+    .fi-badge.fi-style-pill {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+
+    /* ─── Tables (default styles at full spec) ───────────────── */
+    .fi-ta-header {
+        padding: var(--spacing-base) !important;
+    }
+
+    .fi-ta-header-cell {
+        padding: var(--spacing-base) !important;
+    }
+
+    .fi-ta-row {
+        padding: var(--spacing-base) !important;
+    }
+
+    .fi-ta-cell {
+        padding: var(--spacing-base) !important;
+    }
+
+    .fi-ta-selection-cell {
+        padding: var(--spacing-base) !important;
+    }
+
+    /* ─── Pagination (default styles at full spec) ──────────── */
+    .fi-ta-pagination-ctn,
+    .fi-ta-pagination {
+        padding: var(--spacing-base) !important;
+    }
+
+    .fi-pagination-item-btn {
+        padding: var(--spacing-md) var(--spacing-lg) !important;
+    }
+
+    /* ─── Page Layout (default styles at full spec) ──────────── */
+    .fi-main-ctn {
+        padding: 24px 28px !important;
+    }
+
+    /* ─── Modals (default styles at full spec) ───────────────── */
+    .fi-modal-window {
+        margin: 0 !important;
+    }
+
+    .fi-modal-header {
+        padding: 18px 22px 16px !important;
+    }
+
+    .fi-modal-content {
+        padding: 20px 22px !important;
+    }
+
+    .fi-modal-footer {
+        padding: 14px 22px !important;
+    }
+
+    /* ─── Section/Panel Cards (default styles at full spec) ──── */
+    .fi-section-content {
+        padding: 20px !important;
+    }
+
+    .fi-section-header {
+        padding: 14px 20px !important;
+    }
+
+    /* ─── Header (default styles at full spec) ───────────────── */
+    .fi-header-heading {
+        font-size: 1.3125rem !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
    BADGES / STATUS PILLS
    ═══════════════════════════════════════════════════════════ */
 
@@ -1356,3 +1797,922 @@
     display: none !important;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS & MICRO-INTERACTIONS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Animation Keyframes ──────────────────────────────────── */
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ─── Button Press Animation ───────────────────────────────── */
+
+.fi-btn:active:not(:disabled) {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ─── Form Focus Animation ─────────────────────────────────── */
+
+.fi-input:focus,
+.fi-textarea:focus,
+.fi-select:focus {
+    transition: all 0.2s ease !important;
+}
+
+.fi-input-wrp:focus-within {
+    transition: all 0.2s ease !important;
+}
+
+/* ─── Row Hover Animation ──────────────────────────────────── */
+
+.fi-ta-row:hover {
+    transform: translateY(-2px) !important;
+    transition: all 0.2s ease !important;
+    box-shadow: rgba(50, 50, 93, 0.10) 0px 4px 12px -4px !important;
+}
+
+/* ─── Card/Container Hover Animation ───────────────────────── */
+
+.fi-section:hover,
+.fi-card:hover,
+[class*="fi-section"]:hover {
+    transform: scale(1.02) !important;
+    box-shadow: rgba(50, 50, 93, 0.20) 0px 13px 27px -5px,
+                rgba(0, 0, 0, 0.10) 0px 8px 16px -8px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ─── Loading Spinner Animation ────────────────────────────── */
+
+.fi-loading,
+[class*="loading"] {
+    animation: spin 1s linear infinite !important;
+}
+
+/* ─── Utility Animation Classes ────────────────────────────── */
+
+.animate-spin-fast {
+    animation: spin 0.5s linear infinite !important;
+}
+
+.animate-pulse-fast {
+    animation: pulse 1s ease-in-out infinite !important;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-out !important;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.3s ease-out !important;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEXT IMPORTANCE LEVELS
+   ═══════════════════════════════════════════════════════════ */
+
+.text-primary {
+    font-weight: 600 !important;
+    color: var(--color-primary) !important;
+}
+
+.text-secondary {
+    font-weight: 500 !important;
+    color: var(--color-text-dark) !important;
+}
+
+.text-tertiary {
+    font-weight: 400 !important;
+    color: var(--color-text-light) !important;
+}
+
+.text-muted {
+    font-weight: 400 !important;
+    color: #999999 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CALLOUT BOXES
+   ═══════════════════════════════════════════════════════════ */
+
+.callout {
+    padding: var(--spacing-base) !important;
+    border-left: 4px solid transparent !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: var(--spacing-base) !important;
+}
+
+.callout.callout-info {
+    border-left-color: var(--color-info) !important;
+    background-color: #eff6ff !important;
+}
+
+.callout.callout-warning {
+    border-left-color: var(--color-warning) !important;
+    background-color: #fffbeb !important;
+}
+
+.callout.callout-success {
+    border-left-color: var(--color-success) !important;
+    background-color: #f0fdf4 !important;
+}
+
+.callout.callout-danger {
+    border-left-color: var(--color-danger) !important;
+    background-color: #fef2f2 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EMPTY STATES
+   ═══════════════════════════════════════════════════════════ */
+
+.empty-state {
+    text-align: center !important;
+    padding: var(--spacing-2xl) !important;
+    color: var(--color-text-light) !important;
+}
+
+.empty-state-icon {
+    font-size: 3rem !important;
+    color: var(--color-border) !important;
+    margin-bottom: var(--spacing-base) !important;
+}
+
+.empty-state-title {
+    font-size: var(--font-size-h2) !important;
+    font-weight: 600 !important;
+    margin-bottom: var(--spacing-sm) !important;
+    color: var(--color-text-dark) !important;
+}
+
+.empty-state-description {
+    font-size: var(--font-size-body) !important;
+    color: var(--color-text-light) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WHITESPACE HELPERS — Vertical Spacing
+   ═══════════════════════════════════════════════════════════ */
+
+.space-y-2 > * + * {
+    margin-top: 0.5rem !important;
+}
+
+.space-y-4 > * + * {
+    margin-top: 1rem !important;
+}
+
+.space-y-6 > * + * {
+    margin-top: 1.5rem !important;
+}
+
+.space-y-8 > * + * {
+    margin-top: 2rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WHITESPACE HELPERS — Horizontal Spacing
+   ═══════════════════════════════════════════════════════════ */
+
+.space-x-2 > * + * {
+    margin-left: 0.5rem !important;
+}
+
+.space-x-4 > * + * {
+    margin-left: 1rem !important;
+}
+
+.space-x-6 > * + * {
+    margin-left: 1.5rem !important;
+}
+
+.space-x-8 > * + * {
+    margin-left: 2rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MARGIN UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: 0.25rem !important; }
+.mt-2 { margin-top: 0.5rem !important; }
+.mt-3 { margin-top: 0.75rem !important; }
+.mt-4 { margin-top: 1rem !important; }
+.mt-5 { margin-top: 1.25rem !important; }
+.mt-6 { margin-top: 1.5rem !important; }
+.mt-8 { margin-top: 2rem !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 0.75rem !important; }
+.mb-4 { margin-bottom: 1rem !important; }
+.mb-5 { margin-bottom: 1.25rem !important; }
+.mb-6 { margin-bottom: 1.5rem !important; }
+.mb-8 { margin-bottom: 2rem !important; }
+
+.ml-0 { margin-left: 0 !important; }
+.ml-1 { margin-left: 0.25rem !important; }
+.ml-2 { margin-left: 0.5rem !important; }
+.ml-3 { margin-left: 0.75rem !important; }
+.ml-4 { margin-left: 1rem !important; }
+.ml-5 { margin-left: 1.25rem !important; }
+.ml-6 { margin-left: 1.5rem !important; }
+.ml-8 { margin-left: 2rem !important; }
+
+.mr-0 { margin-right: 0 !important; }
+.mr-1 { margin-right: 0.25rem !important; }
+.mr-2 { margin-right: 0.5rem !important; }
+.mr-3 { margin-right: 0.75rem !important; }
+.mr-4 { margin-right: 1rem !important; }
+.mr-5 { margin-right: 1.25rem !important; }
+.mr-6 { margin-right: 1.5rem !important; }
+.mr-8 { margin-right: 2rem !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   PADDING UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+
+.pt-0 { padding-top: 0 !important; }
+.pt-1 { padding-top: 0.25rem !important; }
+.pt-2 { padding-top: 0.5rem !important; }
+.pt-3 { padding-top: 0.75rem !important; }
+.pt-4 { padding-top: 1rem !important; }
+.pt-5 { padding-top: 1.25rem !important; }
+.pt-6 { padding-top: 1.5rem !important; }
+.pt-8 { padding-top: 2rem !important; }
+
+.pb-0 { padding-bottom: 0 !important; }
+.pb-1 { padding-bottom: 0.25rem !important; }
+.pb-2 { padding-bottom: 0.5rem !important; }
+.pb-3 { padding-bottom: 0.75rem !important; }
+.pb-4 { padding-bottom: 1rem !important; }
+.pb-5 { padding-bottom: 1.25rem !important; }
+.pb-6 { padding-bottom: 1.5rem !important; }
+.pb-8 { padding-bottom: 2rem !important; }
+
+.pl-0 { padding-left: 0 !important; }
+.pl-1 { padding-left: 0.25rem !important; }
+.pl-2 { padding-left: 0.5rem !important; }
+.pl-3 { padding-left: 0.75rem !important; }
+.pl-4 { padding-left: 1rem !important; }
+.pl-5 { padding-left: 1.25rem !important; }
+.pl-6 { padding-left: 1.5rem !important; }
+.pl-8 { padding-left: 2rem !important; }
+
+.pr-0 { padding-right: 0 !important; }
+.pr-1 { padding-right: 0.25rem !important; }
+.pr-2 { padding-right: 0.5rem !important; }
+.pr-3 { padding-right: 0.75rem !important; }
+.pr-4 { padding-right: 1rem !important; }
+.pr-5 { padding-right: 1.25rem !important; }
+.pr-6 { padding-right: 1.5rem !important; }
+.pr-8 { padding-right: 2rem !important; }
+
+/* ═══════════════════════════════════════════════════════════
+   USER FEEDBACK MECHANISMS — TASK 9
+   Toasts, Loading Overlays, Skeleton Loaders, Modals, Tooltips, Progress
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── TOASTS ──────────────────────────────────────────────────── */
+
+.fi-toast {
+    padding: var(--spacing-base) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    max-width: 400px !important;
+    margin-bottom: var(--spacing-base) !important;
+    border-left: 4px solid transparent !important;
+    display: flex !important;
+    gap: var(--spacing-base) !important;
+    align-items: flex-start !important;
+    animation: slideIn 0.3s ease-out !important;
+}
+
+/* Success Toast */
+.fi-toast.success {
+    background-color: #D1FAE5 !important;
+    border-left-color: var(--color-success) !important;
+    color: #065F46 !important;
+}
+
+.fi-toast.success .fi-toast-icon {
+    color: var(--color-success) !important;
+}
+
+/* Error Toast */
+.fi-toast.error {
+    background-color: #FEE2E2 !important;
+    border-left-color: var(--color-danger) !important;
+    color: #7F1D1D !important;
+}
+
+.fi-toast.error .fi-toast-icon {
+    color: var(--color-danger) !important;
+}
+
+/* Warning Toast */
+.fi-toast.warning {
+    background-color: #FEF3C7 !important;
+    border-left-color: var(--color-warning) !important;
+    color: #78350F !important;
+}
+
+.fi-toast.warning .fi-toast-icon {
+    color: var(--color-warning) !important;
+}
+
+/* Info Toast */
+.fi-toast.info {
+    background-color: #DBEAFE !important;
+    border-left-color: var(--color-info) !important;
+    color: #0C2340 !important;
+}
+
+.fi-toast.info .fi-toast-icon {
+    color: var(--color-info) !important;
+}
+
+/* Toast Content Wrapper */
+.fi-toast-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--spacing-xs) !important;
+}
+
+.fi-toast-title {
+    font-weight: 600 !important;
+    font-size: var(--font-size-h4) !important;
+}
+
+.fi-toast-message {
+    font-weight: 400 !important;
+    font-size: var(--font-size-body) !important;
+}
+
+/* Toast Close Button */
+.fi-toast-close {
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    color: inherit !important;
+    padding: 0 !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.fi-toast-close:hover {
+    opacity: 0.7 !important;
+}
+
+/* ─── LOADING OVERLAYS ────────────────────────────────────────── */
+
+.fi-loading-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 50 !important;
+    animation: fadeIn 0.2s ease !important;
+}
+
+/* Loading Spinner */
+.fi-loading-spinner {
+    width: 48px !important;
+    height: 48px !important;
+    border: 4px solid rgba(255, 255, 255, 0.3) !important;
+    border-top-color: #ffffff !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+}
+
+/* Loading Spinner Sizes */
+.fi-loading-spinner.sm {
+    width: 32px !important;
+    height: 32px !important;
+    border-width: 3px !important;
+}
+
+.fi-loading-spinner.lg {
+    width: 64px !important;
+    height: 64px !important;
+    border-width: 5px !important;
+}
+
+/* Loading Overlay Content Container */
+.fi-loading-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: var(--spacing-lg) !important;
+}
+
+/* Loading Text */
+.fi-loading-text {
+    color: #ffffff !important;
+    font-size: var(--font-size-body) !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+}
+
+/* ─── SKELETON LOADERS ────────────────────────────────────────── */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #E2E8F0 25%,
+        #F1F5F9 50%,
+        #E2E8F0 75%
+    ) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 1.5s infinite !important;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0 !important;
+    }
+    100% {
+        background-position: -200% 0 !important;
+    }
+}
+
+/* Skeleton Text Line */
+.skeleton-text {
+    height: 16px !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: var(--spacing-sm) !important;
+}
+
+.skeleton-text.short {
+    width: 60% !important;
+}
+
+.skeleton-text.full {
+    width: 100% !important;
+}
+
+/* Skeleton Avatar */
+.skeleton-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    margin-bottom: var(--spacing-base) !important;
+}
+
+/* Skeleton Card/Block */
+.skeleton-block {
+    width: 100% !important;
+    height: 100px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: var(--spacing-base) !important;
+}
+
+/* Skeleton List Item */
+.skeleton-list-item {
+    display: flex !important;
+    gap: var(--spacing-base) !important;
+    margin-bottom: var(--spacing-base) !important;
+}
+
+.skeleton-list-item .skeleton-avatar {
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.skeleton-list-item .skeleton-content {
+    flex: 1 !important;
+}
+
+/* ─── MODALS (Enhanced) ───────────────────────────────────────── */
+
+.fi-modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 40 !important;
+    animation: fadeIn 0.2s ease !important;
+}
+
+.fi-modal-container {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 50 !important;
+    padding: var(--spacing-base) !important;
+}
+
+.fi-modal {
+    background-color: #ffffff !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-xl) !important;
+    max-width: 600px !important;
+    width: 100% !important;
+    animation: scaleIn 0.3s ease-out !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+}
+
+.fi-modal-header {
+    padding: var(--spacing-base) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.fi-modal-heading {
+    font-size: var(--font-size-h2) !important;
+    font-weight: 600 !important;
+    color: var(--color-text-dark) !important;
+}
+
+.fi-modal-body {
+    padding: var(--spacing-base) !important;
+}
+
+.fi-modal-footer {
+    padding: var(--spacing-base) !important;
+    border-top: 1px solid var(--color-border) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: var(--spacing-sm) !important;
+}
+
+.fi-modal-close {
+    background: none !important;
+    border: none !important;
+    color: var(--color-text-light) !important;
+    cursor: pointer !important;
+    font-size: 1.5rem !important;
+    padding: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: color 0.2s ease !important;
+}
+
+.fi-modal-close:hover {
+    color: var(--color-text-dark) !important;
+}
+
+/* Modal Sizes */
+.fi-modal.sm {
+    max-width: 400px !important;
+}
+
+.fi-modal.lg {
+    max-width: 800px !important;
+}
+
+.fi-modal.xl {
+    max-width: 1000px !important;
+}
+
+/* ─── TOOLTIPS ────────────────────────────────────────────────── */
+
+.tooltip {
+    background-color: var(--color-text-dark) !important;
+    color: #ffffff !important;
+    padding: var(--spacing-xs) var(--spacing-sm) !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    z-index: 40 !important;
+    animation: fadeIn 0.2s ease !important;
+}
+
+/* Tooltip Arrow */
+.tooltip-arrow {
+    position: absolute !important;
+    width: 6px !important;
+    height: 6px !important;
+    background-color: var(--color-text-dark) !important;
+    transform: rotate(45deg) !important;
+}
+
+/* Tooltip Positions */
+.tooltip.top {
+    bottom: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+.tooltip.top .tooltip-arrow {
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) rotate(45deg) !important;
+}
+
+.tooltip.bottom {
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin-top: var(--spacing-xs) !important;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    bottom: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) rotate(45deg) !important;
+}
+
+.tooltip.left {
+    right: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-right: var(--spacing-xs) !important;
+}
+
+.tooltip.left .tooltip-arrow {
+    left: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+}
+
+.tooltip.right {
+    left: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-left: var(--spacing-xs) !important;
+}
+
+.tooltip.right .tooltip-arrow {
+    right: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+}
+
+/* ─── PROGRESS INDICATORS ─────────────────────────────────────── */
+
+/* Progress Bar Container */
+.progress-bar {
+    width: 100% !important;
+    height: 4px !important;
+    background-color: var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.progress-bar.lg {
+    height: 8px !important;
+}
+
+/* Progress Fill */
+.progress-fill {
+    height: 100% !important;
+    background-color: var(--color-primary) !important;
+    transition: width 0.5s ease !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* Progress Fill Variants */
+.progress-fill.success {
+    background-color: var(--color-success) !important;
+}
+
+.progress-fill.warning {
+    background-color: var(--color-warning) !important;
+}
+
+.progress-fill.danger {
+    background-color: var(--color-danger) !important;
+}
+
+.progress-fill.info {
+    background-color: var(--color-info) !important;
+}
+
+/* Indeterminate Progress Bar */
+.progress-fill.indeterminate {
+    width: 30% !important;
+    animation: slideProgress 1.5s ease-in-out infinite !important;
+}
+
+@keyframes slideProgress {
+    0% {
+        width: 0% !important;
+        margin-left: 0 !important;
+    }
+    50% {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    100% {
+        width: 0% !important;
+        margin-left: 100% !important;
+    }
+}
+
+/* Progress Wrapper with Label */
+.progress-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--spacing-sm) !important;
+}
+
+.progress-label {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: var(--font-size-body) !important;
+    font-weight: 500 !important;
+    color: var(--color-text-dark) !important;
+}
+
+.progress-percentage {
+    color: var(--color-text-light) !important;
+}
+
+/* Circular Progress Indicator */
+.progress-circle {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: conic-gradient(
+        var(--color-primary) var(--progress-value, 0%),
+        var(--color-border) var(--progress-value, 0%)
+    ) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.progress-circle::after {
+    content: '' !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background-color: #ffffff !important;
+    position: absolute !important;
+}
+
+.progress-circle-text {
+    position: relative !important;
+    z-index: 1 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    color: var(--color-text-dark) !important;
+}
+
+/* Progress Ring (SVG-based) */
+.progress-ring {
+    transform: rotate(-90deg) !important;
+    transform-origin: 50% 50% !important;
+}
+
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.5s ease !important;
+}
+
+/* ─── FEEDBACK COMBINATION PATTERNS ───────────────────────────── */
+
+/* Toast Container (for stacking multiple toasts) */
+.fi-toast-container {
+    position: fixed !important;
+    top: var(--spacing-base) !important;
+    right: var(--spacing-base) !important;
+    z-index: 50 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--spacing-sm) !important;
+    max-width: 400px !important;
+}
+
+/* Modal with Loading Overlay */
+.fi-modal.loading {
+    position: relative !important;
+}
+
+.fi-modal.loading::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-radius: var(--radius-md) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+}
+
+/* Button with Loading State */
+.fi-btn[aria-busy="true"] {
+    opacity: 0.75 !important;
+    pointer-events: none !important;
+}
+
+.fi-btn[aria-busy="true"]::after {
+    content: '' !important;
+    display: inline-block !important;
+    width: 14px !important;
+    height: 14px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-top-color: #ffffff !important;
+    border-radius: 50% !important;
+    animation: spin 0.8s linear infinite !important;
+    margin-left: var(--spacing-xs) !important;
+}
+
+/* ─── ACCESSIBILITY & RESPONSIVE ──────────────────────────────── */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .fi-toast,
+    .fi-loading-overlay,
+    .fi-modal,
+    .skeleton,
+    .tooltip,
+    .progress-fill.indeterminate {
+        animation: none !important;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .fi-toast-container {
+        left: var(--spacing-base) !important;
+        right: var(--spacing-base) !important;
+    }
+
+    .fi-toast {
+        max-width: 100% !important;
+    }
+
+    .fi-modal {
+        max-width: calc(100% - 2rem) !important;
+    }
+
+    .tooltip {
+        font-size: 0.7rem !important;
+        padding: 4px 6px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
