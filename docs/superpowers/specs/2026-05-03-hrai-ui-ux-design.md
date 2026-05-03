@@ -396,16 +396,15 @@ All receive holistic redesign (responsive, micro-interactions, visual hierarchy,
 14. **StaffSuggestionResource** — Suggestions/ideas tracking, moderation queue
 
 ### Custom Pages (9 total)
-1. **Dashboard** — Overview widgets, key metrics, announcements, quick actions
-2. **MyProfile** — User profile view/edit, avatar, contact info, password change
-3. **MyLeavePage** — Personal leave requests, balance summary, request form
-4. **MyAttendancePage** — Personal attendance history, clock in/out, monthly summary
-5. **OrgChart** — Organizational hierarchy visualization, department structure
-6. **Handbook** — Browse company handbook, search, categories
-7. **PersonalityTest** — Take personality assessment, progress, submit
-8. **MySuggestions** — User suggestions/ideas, view own submissions, status
-9. **LeaveApprovalsPage** — Manager approvals, pending requests, approve/reject with notes
-10. **TeamAttendancePage** — Manager: team attendance view, attendance summary, patterns
+1. **MyProfile** — User profile view/edit, avatar, contact info, password change
+2. **MyLeavePage** — Personal leave requests, balance summary, request form
+3. **MyAttendancePage** — Personal attendance history, clock in/out, monthly summary
+4. **OrgChart** — Organizational hierarchy visualization, department structure
+5. **Handbook** — Browse company handbook, search, categories
+6. **PersonalityTest** — Take personality assessment, progress, submit
+7. **MySuggestions** — User suggestions/ideas, view own submissions, status
+8. **LeaveApprovalsPage** — Manager approvals, pending requests, approve/reject with notes
+9. **TeamAttendancePage** — Manager: team attendance view, attendance summary, patterns
 
 ### Default Page
 - **Dashboard** — Default landing page after login, shows overview and quick actions
