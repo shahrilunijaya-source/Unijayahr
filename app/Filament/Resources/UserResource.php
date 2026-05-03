@@ -72,6 +72,14 @@ class UserResource extends Resource
                 Forms\Components\Toggle::make('is_active')
                     ->label('Can log in')
                     ->default(true),
+                Forms\Components\TimePicker::make('work_start_time')
+                    ->seconds(false)
+                    ->default('10:00')
+                    ->helperText('Default 10:00'),
+                Forms\Components\TimePicker::make('work_end_time')
+                    ->seconds(false)
+                    ->default('19:00')
+                    ->helperText('Default 19:00'),
             ])->columns(2),
 
             Forms\Components\Section::make('Access')->schema([

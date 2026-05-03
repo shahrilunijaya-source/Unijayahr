@@ -8,6 +8,10 @@ Route::get('/', fn () => redirect('/app'));
 Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('/auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
+Route::get('attendance/photo/{record}/{which}', \App\Http\Controllers\AttendancePhotoController::class)
+    ->middleware('auth')
+    ->name('attendance.photo');
+
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/documents/download/{id}', function ($id) {
         $doc = \App\Models\EmployeeDocument::findOrFail($id);

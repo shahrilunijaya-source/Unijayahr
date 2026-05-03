@@ -2,17 +2,12 @@
 
     {{-- Brand block (above form) --}}
     <div class="mb-6">
-        <div class="flex items-center gap-2.5 mb-4">
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg" style="background:#0d1b2e;">
-                <svg class="h-5 w-5" style="color:#f5a623;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z"/>
-                    <path fill-rule="evenodd" d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75Zm-6 .75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z" clip-rule="evenodd"/>
-                </svg>
-            </div>
-            <span class="text-lg font-bold" style="color:#0d1b2e;">Unijaya HR</span>
+        <div class="flex items-center gap-3 mb-4">
+            <img src="{{ asset('logo_unijaya.png') }}" alt="Unijaya" style="height:2.5rem;width:auto;">
+            <span class="text-lg font-bold" style="color:#061B31;">Unijaya HR</span>
         </div>
         <div class="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs" style="border-color:#e5e7eb;background:#f9fafb;color:#6b7280;">
-            <span class="h-1.5 w-1.5 rounded-full" style="background:#16a34a;"></span>
+            <span class="h-1.5 w-1.5 rounded-full" style="background:#CC0000;"></span>
             Unijaya Resources Sdn Bhd
         </div>
     </div>
@@ -26,6 +21,23 @@
             :full-width="$this->hasFullWidthFormActions()"
         />
     </x-filament-panels::form>
+
+    {{-- Test Credentials --}}
+    @if(app()->isLocal())
+        <div class="mt-4 rounded-lg border p-3 text-xs" style="border-color:#e5e7eb;background:#f9fafb;">
+            <p class="font-semibold mb-2" style="color:#374151;">Akaun ujian</p>
+            <div class="space-y-1.5">
+                <div class="flex items-center justify-between gap-2">
+                    <span style="color:#6b7280;">Admin (shahril)</span>
+                    <code class="rounded px-1.5 py-0.5 font-mono" style="background:#e5e7eb;color:#111827;">shahril.unijaya@gmail.com / shahril.26</code>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <span style="color:#6b7280;">Staff</span>
+                    <code class="rounded px-1.5 py-0.5 font-mono" style="background:#e5e7eb;color:#111827;">{callname}.unijaya@gmail.com / {callname}.26</code>
+                </div>
+            </div>
+        </div>
+    @endif
 
     {{-- Google OAuth --}}
     @if(config('services.google.client_id'))

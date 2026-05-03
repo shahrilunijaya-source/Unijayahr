@@ -78,15 +78,23 @@ class KpiPeriodResource extends Resource
     {
         $period->update(['status' => 'open', 'opened_at' => now()]);
 
-        $activeStaff = User::where('is_active', true)->whereNotNull('level_id')->get();
+        $activeStaff = User::where('is_active', true)
+            ->whereNotNull('level_id')
+            ->with('superior')
+            ->get();
+
+        // Load all active templates with items in two queries total
+        $templates = KpiRubricTemplate::where('is_active', true)
+            ->with('items')
+            ->get()
+            ->groupBy('level_id')
+            ->map(fn ($group) => $group->sortByDesc('id')->first());
+
         $created = 0;
+        $now = now();
 
         foreach ($activeStaff as $staff) {
-            $template = KpiRubricTemplate::where('level_id', $staff->level_id)
-                ->where('is_active', true)
-                ->latest()
-                ->first();
-
+            $template = $templates->get($staff->level_id);
             if (! $template) continue;
 
             $reviewer = $staff->superior ?? $staff;
@@ -102,16 +110,17 @@ class KpiPeriodResource extends Resource
             ]);
 
             if ($review->wasRecentlyCreated) {
-                // Snapshot rubric items
-                foreach ($template->items as $item) {
-                    KpiReviewScore::create([
-                        'review_id'             => $review->id,
-                        'item_id'               => $item->id,
-                        'item_label_snapshot'   => $item->criterion,
-                        'item_weight_snapshot'  => $item->weight,
-                        'max_score_snapshot'    => $item->max_score,
-                    ]);
-                }
+                KpiReviewScore::insert(
+                    $template->items->map(fn ($item) => [
+                        'review_id'            => $review->id,
+                        'item_id'              => $item->id,
+                        'item_label_snapshot'  => $item->criterion,
+                        'item_weight_snapshot' => $item->weight,
+                        'max_score_snapshot'   => $item->max_score,
+                        'created_at'           => $now,
+                        'updated_at'           => $now,
+                    ])->all()
+                );
                 $created++;
             }
         }

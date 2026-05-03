@@ -34,6 +34,8 @@ class User extends Authenticatable implements FilamentUser
         'is_active',
         'must_change_password',
         'last_login_at',
+        'work_start_time',
+        'work_end_time',
     ];
 
     protected $hidden = [
@@ -52,6 +54,8 @@ class User extends Authenticatable implements FilamentUser
             'ic_number'            => 'encrypted',
             'is_active'            => 'boolean',
             'must_change_password' => 'boolean',
+            'work_start_time'      => 'string',
+            'work_end_time'        => 'string',
         ];
     }
 
@@ -118,5 +122,10 @@ class User extends Authenticatable implements FilamentUser
     public function leaveApprovals(): HasMany
     {
         return $this->hasMany(LeaveRequest::class, 'manager_id');
+    }
+
+    public function attendanceRecords(): HasMany
+    {
+        return $this->hasMany(\App\Models\AttendanceRecord::class);
     }
 }

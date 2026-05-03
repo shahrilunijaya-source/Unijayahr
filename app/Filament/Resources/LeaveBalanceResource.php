@@ -3,6 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LeaveBalanceResource\Pages;
 use App\Models\LeaveBalance;
+use App\Models\LeaveRequest;
 use App\Models\LeaveType;
 use App\Models\User;
 use Filament\Forms;
@@ -10,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class LeaveBalanceResource extends Resource
 {
@@ -22,6 +24,18 @@ class LeaveBalanceResource extends Resource
     public static function canViewAny(): bool
     {
         return auth()->user()?->hasAnyRole(['admin', 'hr']) ?? false;
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->addSelect([
+                'used_days' => LeaveRequest::selectRaw('COALESCE(SUM(total_days), 0)')
+                    ->whereColumn('user_id', 'leave_balances.user_id')
+                    ->whereColumn('leave_type_id', 'leave_balances.leave_type_id')
+                    ->where('status', 'approved')
+                    ->whereRaw("strftime('%Y', start_date) = CAST(leave_balances.year AS TEXT)"),
+            ]);
     }
 
     public static function form(Form $form): Form
@@ -63,12 +77,10 @@ class LeaveBalanceResource extends Resource
             Tables\Columns\TextColumn::make('year')->sortable(),
             Tables\Columns\TextColumn::make('allocated_days')->label('Allocated'),
             Tables\Columns\TextColumn::make('carried_over')->label('C/F'),
-            Tables\Columns\TextColumn::make('used_days_display')
-                ->label('Used')
-                ->getStateUsing(fn ($record) => $record->usedDays()),
+            Tables\Columns\TextColumn::make('used_days')->label('Used'),
             Tables\Columns\TextColumn::make('remaining_days_display')
                 ->label('Remaining')
-                ->getStateUsing(fn ($record) => $record->remainingDays()),
+                ->getStateUsing(fn ($record) => max(0, $record->totalAllocated() - (float) ($record->used_days ?? 0))),
         ])->filters([
             Tables\Filters\SelectFilter::make('year')
                 ->options(array_combine(range(2024, 2028), range(2024, 2028)))

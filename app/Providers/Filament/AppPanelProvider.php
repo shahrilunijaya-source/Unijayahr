@@ -32,9 +32,11 @@ class AppPanelProvider extends PanelProvider
             ->path('app')
             ->login(Login::class)
             ->brandName('Unijaya HR')
-            ->viteTheme('resources/css/app.css')
+            ->brandLogo(asset('logo_unijaya.png'))
+            ->brandLogoHeight('2rem')
+            ->viteTheme('resources/css/filament/app/theme.css')
             ->colors([
-                'primary'  => Color::hex('#d97706'),
+                'primary'  => Color::hex('#CC0000'),
                 'gray'     => Color::Slate,
                 'danger'   => Color::Red,
                 'success'  => Color::Green,

@@ -23,43 +23,44 @@ class OrgChart extends Page
 
     public function getDepartments()
     {
-        return Department::with(['units' => function ($q) {
+        $depts = Department::with(['units' => function ($q) {
             $q->orderBy('order')->with(['users' => function ($u) {
-                $u->where('is_active', true)
-                  ->with('level')
-                  ->orderByRaw('(SELECT `order` FROM levels WHERE levels.id = users.level_id) DESC')
-                  ->orderBy('name');
+                $u->where('is_active', true)->with('level')->orderBy('name');
             }]);
         }])->get();
+
+        foreach ($depts as $dept) {
+            foreach ($dept->units as $unit) {
+                $unit->setRelation('users',
+                    $unit->users->sortByDesc(fn ($u) => $u->level?->order ?? 0)->values()
+                );
+            }
+        }
+
+        return $depts;
     }
 
     public function getReportingTree(): array
     {
-        $roots = User::where('is_active', true)
-            ->whereNull('superior_id')
+        $allUsers = User::where('is_active', true)
             ->with('level')
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->keyBy('id');
 
-        return $this->buildTree($roots);
+        return $this->buildTree($allUsers, null, 0);
     }
 
-    private function buildTree($users, int $depth = 0): array
+    private function buildTree($allUsers, ?int $parentId, int $depth): array
     {
-        $tree = [];
-        foreach ($users as $user) {
-            $subordinates = User::where('superior_id', $user->id)
-                ->where('is_active', true)
-                ->with('level')
-                ->orderBy('name')
-                ->get();
-
-            $tree[] = [
+        return $allUsers
+            ->where('superior_id', $parentId)
+            ->map(fn ($user) => [
                 'user'     => $user,
                 'depth'    => $depth,
-                'children' => $subordinates->isNotEmpty() ? $this->buildTree($subordinates, $depth + 1) : [],
-            ];
-        }
-        return $tree;
+                'children' => $this->buildTree($allUsers, $user->id, $depth + 1),
+            ])
+            ->values()
+            ->all();
     }
 }
