@@ -142,24 +142,31 @@
     background-color: #061B31 !important;
 }
 
-/* Logo on dark sidebar — white container so full logo is visible */
+/* Logo in white header */
 .fi-sidebar-header img.fi-logo {
-    background: #ffffff;
-    border-radius: 4px;
-    padding: 3px 6px;
+    height: 2.5rem;
+    width: auto;
 }
 
 .fi-sidebar-header {
-    background-color: #0A0A0A !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #E5EDF5 !important;
 }
 
 .fi-body-has-topbar .fi-sidebar-header {
-    background-color: #0A0A0A !important;
+    background-color: #ffffff !important;
     box-shadow: none !important;
-    border: none !important;
+    border-bottom: 1px solid #E5EDF5 !important;
 }
 
 /* Group labels */
+.fi-sidebar-header .fi-brand-name {
+    color: #061B31 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
 .fi-sidebar-group-label {
     color: rgba(255, 255, 255, 0.40);
     font-size: 0.6875rem;
@@ -771,3 +778,4 @@
 .fi-color-scheme-toggle {
     display: none !important;
 }
+
